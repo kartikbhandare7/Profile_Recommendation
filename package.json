@@ -1,0 +1,30 @@
+{
+  "name": "profilerecommendation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+ "scripts": {
+  "start": "node src/app.js",
+  "dev": "nodemon src/app.js",
+  "test": "jest"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartikbhandare7/Profile_Recommendation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kartikbhandare7/Profile_Recommendation/issues"
+  },
+  "homepage": "https://github.com/kartikbhandare7/Profile_Recommendation#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
