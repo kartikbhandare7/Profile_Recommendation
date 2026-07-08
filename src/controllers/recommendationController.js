@@ -24,6 +24,27 @@ async function recommend(req,res){
 
 }
 
+async function explainItem(req, res) {
+    try {
+
+        const explanation = await recommendationService.explainItem(req.params.id);
+
+        res.status(200).json({
+            success: true,
+            data: explanation
+        });
+
+    } catch (error) {
+
+        res.status(404).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+}
+
 module.exports={
-    recommend
+    recommend,
+    explainItem
 };

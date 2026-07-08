@@ -1,4 +1,5 @@
 const repository = require("../repositories/recommendationRepository");
+const itemRepository = require("../repositories/itemRepository");
 
 async function recommend(profile) {
 
@@ -109,6 +110,30 @@ async function recommend(profile) {
 
 }
 
+async function explainItem(id) {
+
+    const item = await itemRepository.getItemById(id);
+
+    if (!item) {
+        throw new Error("Item not found");
+    }
+
+    return {
+        itemId: item.id,
+        title: item.title,
+        eligibility: {
+            age: `${item.min_age} - ${item.max_age}`,
+            minimumExperience: `${item.min_experience} years`,
+            requiredSkills: item.required_skills.split(","),
+            location: item.location,
+            salary: `${item.salary} LPA`
+        },
+        explanation:
+            `Candidates between ${item.min_age} and ${item.max_age} years of age with at least ${item.min_experience} years of experience and skills in ${item.required_skills} are eligible. The role is located in ${item.location} and offers ${item.salary} LPA.`
+    };
+
+}
 module.exports = {
-    recommend
+    recommend,
+    explainItem
 };
