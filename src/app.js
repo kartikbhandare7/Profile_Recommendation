@@ -2,6 +2,10 @@ const express = require("express");
 
 const itemRoutes = require("./routes/itemRoutes");
 
+const recommendationRoutes = require("./routes/recommendationRoutes");
+
+app.use("/recommend", recommendationRoutes);
+
 const app = express();
 
 app.use(express.json());
