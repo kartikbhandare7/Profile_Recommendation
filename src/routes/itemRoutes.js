@@ -1,17 +1,17 @@
 const express = require("express");
-
+const authenticate=require("../middleware/authMiddleware");
 const router = express.Router();
 
 const controller = require("../controllers/itemController");
 
-router.get("/",controller.getAllItems);
+router.get("/",authenticate,controller.getAllItems);
 
-router.get("/:id",controller.getItemById);
+router.get("/:id",authenticate,controller.getItemById);
 
-router.post("/",controller.createItem);
+router.post("/",authenticate,controller.createItem);
 
-router.put("/:id",controller.updateItem);
+router.put("/:id",authenticate,controller.updateItem);
 
-router.delete("/:id",controller.deleteItem);
+router.delete("/:id",authenticate,controller.deleteItem);
 
 module.exports = router;
