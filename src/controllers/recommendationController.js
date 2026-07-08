@@ -1,28 +1,54 @@
 const recommendationService = require("../services/recommendationService");
 
-async function recommend(req,res){
+async function recommend(req, res) {
 
-    try{
+    try {
+
+        const {
+            age,
+            experience,
+            skills,
+            location,
+            preferredCategory,
+            salaryExpectation
+        } = req.body;
+
+        // Validation
+        if (
+            age === undefined ||
+            experience === undefined ||
+            !Array.isArray(skills) ||
+            skills.length === 0 ||
+            !location ||
+            !preferredCategory ||
+            salaryExpectation === undefined
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing or invalid required fields."
+            });
+        }
 
         const recommendations = await recommendationService.recommend(req.body);
 
-        res.status(200).json({
-            success:true,
+        return res.status(200).json({
+            success: true,
             recommendations
         });
 
-    }catch(err){
+    } catch (err) {
 
         console.error(err);
 
-        res.status(500).json({
-            success:false,
-            message:"Recommendation failed"
+        return res.status(500).json({
+            success: false,
+            message: "Recommendation failed."
         });
 
     }
 
 }
+
 
 async function explainItem(req, res) {
     try {
