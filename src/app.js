@@ -1,19 +1,15 @@
 const express = require("express");
-const pool = require("./config/db");
+
+const itemRoutes = require("./routes/itemRoutes");
 
 const app = express();
 
 app.use(express.json());
 
-pool.query("SELECT NOW()")
-    .then(result => {
-        console.log("Database Connected");
-        console.log(result.rows[0]);
-    })
-    .catch(err => {
-        console.log(err);
-    });
+app.use("/items", itemRoutes);
 
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
-}); 
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
